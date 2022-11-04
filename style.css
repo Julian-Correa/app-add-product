@@ -1,0 +1,22 @@
+ .nav-brand, a {
+    padding-left: 2rem;
+}
+
+.form-group {
+padding: 3px;
+
+}
+.form-group:last-of-type{
+    margin-bottom: 6px;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+ .conteiner{
+    width: min(90%, 120rem);
+    margin: 0 auto;
+} 
