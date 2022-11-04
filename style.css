@@ -1,4 +1,4 @@
- .nav-brand, a {
+  .nav-brand, a {
     padding-left: 2rem;
 }
 
@@ -10,13 +10,26 @@ padding: 3px;
     margin-bottom: 6px;
 }
 
-.card-body{
+   form .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+}  
 
- .conteiner{
+  .conteiner{
     width: min(90%, 120rem);
     margin: 0 auto;
 } 
+
+.producto-agregado{
+    display:flex ;
+    flex-direction: column;
+    justify-items: center;
+    
+}
+
+.card{
+    margin-bottom: 1rem;
+}
+
+ 
