@@ -29,29 +29,31 @@ class UI {
     };
 
     resetForm(){
-        document.getElementById('product-form').reset();
+        document.getElementById("product-form").reset();
     }
 
 
 
     deleteProduct(element) {
-        if (element.name ==='delete') {
-            element.parentElement.parentElement.parentElement.remove()
+        if (element.name === "delete") {
+          element.parentElement.parentElement.remove();
+          this.showMessage('Producto eliminado correctamente', 'warning')
         }
-
-     
-         
-
     };
 
+
+
     showMessage(message, cssClass) {
-        const div= document.createElement('div');
-        div.className= 'alert alert-'+ cssClass ; 'mt-4';
+        const div= document.createElement("div");
+        div.className = `alert alert-${cssClass} mt-2`;
         div.appendChild(document.createTextNode(message));
         //show in DOM
-        const container = document.querySelector('.container');
-        const app = document.querySelector('#app');
+        const container = document.querySelector(".container");
+        const app = document.querySelector("#app");
         container.insertBefore(div, app);
+        setTimeout(function () {
+            document.querySelector('.alert').remove();
+        }, 3000);
     };
 }
 
@@ -66,10 +68,13 @@ document.getElementById('product-form')
    const product = new Product(name, price, year);
 
    const ui = new UI();
+
+   if (name === ''|| price === ''|| year ==='') {
+    return ui.showMessage('Todos los campos son obligatorios','danger')
+   }
    ui.addProduct(product);
-   ui.resetForm();
-   ui.deleteProduct();
-   ui.showMessage('producto agregado correctamente', 'bg-success');
+   ui.resetForm();   
+   ui.showMessage("Producto agregado correctamente", "success");
 
    
 
