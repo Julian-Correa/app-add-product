@@ -36,6 +36,11 @@ class UI {
 
     deleteProduct(element) {
         if (element.name === "delete") {
+          const productItem = element.closest(".card");
+          const productName = productItem.querySelector("strong:nth-of-type(1)").textContent.replace("Producto : ", "").trim();
+          const productPrice = productItem.querySelector("strong:nth-of-type(2)").textContent.replace("Precio : ", "").trim();
+          const productYear = productItem.querySelector("strong:nth-of-type(3)").textContent.replace("Año : ", "").trim();
+          removeProductFromStorage(productName, productPrice, productYear);
           element.parentElement.parentElement.remove();
           this.showMessage('Producto eliminado correctamente', 'warning')
         }
@@ -57,9 +62,37 @@ class UI {
     };
 }
 
+const getProductsFromStorage = () => {
+  const products = localStorage.getItem("products");
+  return products ? JSON.parse(products) : [];
+};
+
+const addProductToStorage = (product) => {
+  const products = getProductsFromStorage();
+  products.push(product);
+  localStorage.setItem("products", JSON.stringify(products));
+};
+
+const removeProductFromStorage = (name, price, year) => {
+  const products = getProductsFromStorage();
+  const updatedProducts = products.filter(
+    (product) =>
+      product.name !== name ||
+      product.price !== price ||
+      product.year !== year
+  );
+  localStorage.setItem("products", JSON.stringify(updatedProducts));
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ui = new UI();
+  getProductsFromStorage().forEach((product) => ui.addProduct(product));
+});
+
 //DOM Events
 document.getElementById('product-form')
 .addEventListener('submit', function(evento){
+  evento.preventDefault();
    const name = document.getElementById('name').value;
    const price = document.getElementById('price').value;
    const year = document.getElementById('year').value;
@@ -73,19 +106,16 @@ document.getElementById('product-form')
     return ui.showMessage('Todos los campos son obligatorios','danger')
    }
    ui.addProduct(product);
+   addProductToStorage(product);
    ui.resetForm();   
    ui.showMessage("Producto agregado correctamente", "success");
 
-   
-
- evento.preventDefault();
 });
 
 document.getElementById('product-list').addEventListener('click',function(e){
    const ui =new UI();
    ui.deleteProduct(e.target)
 });
-
 
 
 
