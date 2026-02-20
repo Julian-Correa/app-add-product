@@ -1,0 +1,39 @@
+  .nav-brand, a {
+    padding-left: 2rem;
+}
+
+.form-group {
+padding: 3px;
+
+}
+.form-group:last-of-type{
+    margin-bottom: 6px;
+}
+
+   form .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}  
+
+  .container{
+    width: min(90%, 120rem);
+    margin: 0 auto;
+} 
+
+.producto-agregado{
+    display:flex ;
+    flex-direction: column;
+    justify-items: center;
+    
+}
+
+.card{
+    margin-bottom: 1rem;
+}
+
+.cssClass{
+    margin: 1 solid black;
+}
+
+ 
